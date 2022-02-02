@@ -18,6 +18,7 @@ class User(_base):
     id = _col(name="uid",type_=_int,primary_key=True,index=True)
     name = _col("Full Name",_str(100),nullable=False)
     username = _col("username",_str(25),unique=True,index=True,nullable=False)
+    email = _col("email_id",_str,unique=True,index=True)
     sex = _col("sex",_str,default="male")
     password = _col("password",_str,nullable=False)
     join_date = _col("doj",_date,default=date.today())

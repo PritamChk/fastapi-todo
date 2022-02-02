@@ -12,6 +12,7 @@ class CreateUser(__UserBase__):
     join_date:_date
 
 class ShowUser(__UserBase__):
+    id: int
     join_date : _date
     
     class Config:
