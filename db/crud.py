@@ -4,8 +4,8 @@ from db import models
 from apis.user_api.schema import CreateUser,ShowUser
 from apis.todo_api.schema import CreateTodo,Todo
 
-def get_user(db: Session, user_id: int):
-    return db.query(models.User).filter(models.User.id == user_id).first()
+def get_user(db: Session, username: str):
+    return db.query(models.User).filter(models.User.username == username).first()
 
 
 def get_user_by_email(db: Session, email: str):
@@ -17,8 +17,8 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_user(db: Session, user: CreateUser):
-    fake_hashed_password = user.password + "notreallyhashed"
-    db_user = models.User(email=user.email, hashed_password=fake_hashed_password)
+    password = user.password  
+    db_user = models.User(**user.dict())
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
